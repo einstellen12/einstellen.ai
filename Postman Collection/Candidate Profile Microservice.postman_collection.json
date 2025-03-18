@@ -1,0 +1,500 @@
+{
+	"info": {
+		"_postman_id": "ff16a8a3-e059-441d-9ae0-841a27634bf7",
+		"name": "Candidate Profile Microservice",
+		"description": "Postman collection for testing the Candidate Profile Microservice APIs.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25431245"
+	},
+	"item": [
+		{
+			"name": "Create Candidate Profile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"dob\": \"1990-01-01\",\n  \"phone\": \"+1234567890\",\n  \"location\": \"New York\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/candidates/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"candidates",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Candidate Profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/candidates/{{candidate_id}}/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"candidates",
+						"{{candidate_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Candidate Profile",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"phone\": \"+1987654321\",\n  \"location\": \"San Francisco\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/candidates/{{candidate_id}}/update/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"candidates",
+						"{{candidate_id}}",
+						"update",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload CV",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cv",
+							"type": "file",
+							"src": "/path/to/your/resume.pdf"
+						},
+						{
+							"key": "job_role",
+							"value": "Software Engineer",
+							"type": "text"
+						},
+						{
+							"key": "job_description",
+							"value": "Develop software solutions using Python and Django.",
+							"type": "text"
+						},
+						{
+							"key": "key_skills",
+							"value": "[\"Python\", \"Django\", \"REST APIs\"]",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/candidates/{{candidate_id}}/upload-cv/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"candidates",
+						"{{candidate_id}}",
+						"upload-cv",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Education",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"degree\": \"B.Sc. Computer Science\",\n  \"university\": \"MIT\",\n  \"start_year\": 2010,\n  \"end_year\": 2014\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/candidates/{{candidate_id}}/education/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"candidates",
+						"{{candidate_id}}",
+						"education",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Work Experience",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"company_name\": \"Tech Corp\",\n  \"job_title\": \"Software Engineer\",\n  \"start_date\": \"2015-06-01\",\n  \"end_date\": \"2020-12-31\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/candidates/{{candidate_id}}/work-experience/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"candidates",
+						"{{candidate_id}}",
+						"work-experience",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Skill",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"skill_name\": \"Python\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/candidates/{{candidate_id}}/skills/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"candidates",
+						"{{candidate_id}}",
+						"skills",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Certification",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"AWS Certified Developer\",\n  \"issued_by\": \"Amazon Web Services\",\n  \"issue_date\": \"2022-03-15\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/candidates/{{candidate_id}}/certifications/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"candidates",
+						"{{candidate_id}}",
+						"certifications",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Personal Info",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"first_name\": \"Jane\",\n  \"last_name\": \"Smith\",\n  \"phone\": \"+1987654321\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/candidates/{{candidate_id}}/edit-personal/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"candidates",
+						"{{candidate_id}}",
+						"edit-personal",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Education",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"degree\": \"M.Sc. Computer Science\",\n  \"end_year\": 2016\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/education/{{education_id}}/edit/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"education",
+						"{{education_id}}",
+						"edit",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Work Experience",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"company_name\": \"New Tech Inc\",\n  \"end_date\": \"2021-12-31\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/work-experience/{{work_experience_id}}/edit/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"work-experience",
+						"{{work_experience_id}}",
+						"edit",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Skill",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"skill_name\": \"Django\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/skills/{{skill_id}}/edit/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"skills",
+						"{{skill_id}}",
+						"edit",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Certification",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"AWS Certified Solutions Architect\",\n  \"issue_date\": \"2023-01-10\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/certifications/{{certification_id}}/edit/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"certifications",
+						"{{certification_id}}",
+						"edit",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000"
+		},
+		{
+			"key": "jwt_token",
+			"value": "your-jwt-token-here"
+		},
+		{
+			"key": "candidate_id",
+			"value": "your-candidate-uuid-here"
+		},
+		{
+			"key": "education_id",
+			"value": "your-education-uuid-here"
+		},
+		{
+			"key": "work_experience_id",
+			"value": "your-work-experience-uuid-here"
+		},
+		{
+			"key": "skill_id",
+			"value": "your-skill-uuid-here"
+		},
+		{
+			"key": "certification_id",
+			"value": "your-certification-uuid-here"
+		}
+	]
+}

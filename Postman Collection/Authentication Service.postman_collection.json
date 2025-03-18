@@ -1,0 +1,577 @@
+{
+	"info": {
+		"_postman_id": "f4d9db31-7c66-40c4-b093-262da811897c",
+		"name": "Authentication Service",
+		"description": "Postman collection for the Authentication Service microservice of the AI HRMS.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25431245"
+	},
+	"item": [
+		{
+			"name": "Candidate Signup - Send OTP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "localhost",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"phone_number\": \"+1234567891\"\n//   \"full_name\": \"John Doe\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/candidate/signup/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"candidate",
+						"signup",
+						""
+					]
+				},
+				"description": "Send OTP to candidate's phone during signup."
+			},
+			"response": []
+		},
+		{
+			"name": "Candidate Signup - Verify OTP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "test.local",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"phone_number\": \"+1234567891\",\n//   \"full_name\": \"John Doe\",\n  \"otp\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/candidate/signup/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"candidate",
+						"signup",
+						""
+					]
+				},
+				"description": "Complete candidate signup with OTP verification."
+			},
+			"response": []
+		},
+		{
+			"name": "Candidate Login - Send OTP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "test.local",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"phone_number\": \"+1234567890\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/candidate/login/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"candidate",
+						"login",
+						""
+					]
+				},
+				"description": "Send OTP to candidate's phone during login."
+			},
+			"response": []
+		},
+		{
+			"name": "Candidate Login - Verify OTP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "test.local",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"phone_number\": \"+1234567890\",\n  \"otp\": \"654321\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/candidate/login/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"candidate",
+						"login",
+						""
+					]
+				},
+				"description": "Complete candidate login with OTP verification."
+			},
+			"response": []
+		},
+		{
+			"name": "Employer Signup - Send OTP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "test.local",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"employer1\",\n  \"email\": \"emp1@test.com\",\n  \"phone_number\": \"+0987654321\",\n  \"company_name\": \"TestCo\",\n  \"password\": \"pass123\",\n  \"full_name\": \"employer1\",\n  \"confirm_password\": \"pass123\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/employer/signup/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"employer",
+						"signup",
+						""
+					]
+				},
+				"description": "Send OTP to employer's phone during signup."
+			},
+			"response": []
+		},
+		{
+			"name": "Employer Signup - Verify OTP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "test.local",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"employer1\",\n  \"email\": \"emp1@test.com\",\n  \"phone_number\": \"+0987654321\",\n  \"company_name\": \"TestCo\",\n  \"password\": \"pass123\",\n  \"confirm_password\": \"pass123\",\n  \"full_name\": \"employer1\",\n  \"otp\": \"789123\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/employer/signup/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"employer",
+						"signup",
+						""
+					]
+				},
+				"description": "Complete employer signup with OTP verification."
+			},
+			"response": []
+		},
+		{
+			"name": "Employer Login - Send OTP (Email)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "test.local",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"login_field\": \"emp1@test.com\",\n  \"password\": \"pass123\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/employer/login/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"employer",
+						"login",
+						""
+					]
+				},
+				"description": "Send OTP to employer's phone during login using email."
+			},
+			"response": []
+		},
+		{
+			"name": "Employer Login - Verify OTP (Email)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "test.local",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"login_field\": \"emp1@test.com\",\n  \"password\": \"pass123\",\n  \"otp\": \"456789\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/employer/login/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"employer",
+						"login",
+						""
+					]
+				},
+				"description": "Complete employer login with OTP verification using email."
+			},
+			"response": []
+		},
+		{
+			"name": "Employer Login - Send OTP (Phone)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "test.local",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"login_field\": \"+0987654321\",\n  \"password\": \"pass123\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/employer/login/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"employer",
+						"login",
+						""
+					]
+				},
+				"description": "Send OTP to employer's phone during login using phone."
+			},
+			"response": []
+		},
+		{
+			"name": "Employer Login - Verify OTP (Phone)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "test.local",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"login_field\": \"+0987654321\",\n  \"password\": \"pass123\",\n  \"otp\": \"456789\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/employer/login/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"employer",
+						"login",
+						""
+					]
+				},
+				"description": "Complete employer login with OTP verification using phone."
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "test.local",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"refresh_token\": \"{{refresh_token}}\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/refresh/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"refresh",
+						""
+					]
+				},
+				"description": "Refresh an access token using a refresh token."
+			},
+			"response": []
+		},
+		{
+			"name": "User Profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Host",
+						"value": "test.local",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/user/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"user",
+						""
+					]
+				},
+				"description": "Retrieve authenticated user's profile."
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Role",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Host",
+						"value": "test.local",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"role\": \"550e8400-e29b-41d4-a716-446655440001\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/assign-role/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"assign-role",
+						""
+					]
+				},
+				"description": "Assign a role to a user (admin only)."
+			},
+			"response": []
+		},
+		{
+			"name": "Setup MFA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Host",
+						"value": "test.local",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/mfa/setup/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"mfa",
+						"setup",
+						""
+					]
+				},
+				"description": "Setup MFA for the authenticated user."
+			},
+			"response": []
+		},
+		{
+			"name": "Verify MFA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Host",
+						"value": "test.local"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"totp_code\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/mfa/verify/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"mfa",
+						"verify",
+						""
+					]
+				},
+				"description": "Verify MFA code for the authenticated user."
+			},
+			"response": []
+		},
+		{
+			"name": "Social Login (Google)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Host",
+						"value": "test.local"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"provider\": \"google-oauth2\",\n  \"access_token\": \"your-google-access-token\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/social-login/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"social-login",
+						""
+					]
+				},
+				"description": "Login using Google OAuth2."
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000"
+		},
+		{
+			"key": "access_token",
+			"value": ""
+		},
+		{
+			"key": "refresh_token",
+			"value": ""
+		}
+	]
+}

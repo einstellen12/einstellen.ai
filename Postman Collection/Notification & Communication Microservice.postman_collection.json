@@ -1,0 +1,253 @@
+{
+	"info": {
+		"_postman_id": "197c4251-57b3-498c-a60d-f8c28834783f",
+		"name": "Notification & Communication Microservice",
+		"description": "Postman collection for testing the Notification & Communication Microservice APIs. Note: WebSocket testing requires a separate client.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25431245"
+	},
+	"item": [
+		{
+			"name": "Send Email Notification",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"notification_type\": \"email\",\n  \"subject\": \"Interview Scheduled\",\n  \"message\": \"Your interview is scheduled for tomorrow at 10 AM.\",\n  \"recipient\": \"candidate@example.com\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/notifications/send/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"notifications",
+						"send",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send SMS Notification",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"notification_type\": \"sms\",\n  \"message\": \"Your interview is tomorrow at 10 AM.\",\n  \"recipient\": \"+1234567890\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/notifications/send/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"notifications",
+						"send",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Notifications",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/notifications/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"notifications",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"receiver_id\": \"{{receiver_id}}\",\n  \"content\": \"Hello, how are you?\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/messages/send/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"messages",
+						"send",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Messages",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/messages/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"messages",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Interview Reminder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"application_id\": \"{{application_id}}\",\n  \"candidate_id\": \"{{candidate_id}}\",\n  \"employer_id\": \"{{employer_id}}\",\n  \"interview_time\": \"2025-03-10T10:00:00Z\",\n  \"reminder_time\": \"2025-03-10T09:00:00Z\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/reminders/create/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"reminders",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Interview Reminders",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/reminders/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"reminders",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000"
+		},
+		{
+			"key": "jwt_token",
+			"value": "your-jwt-token-here"
+		},
+		{
+			"key": "user_id",
+			"value": "your-user-uuid-here"
+		},
+		{
+			"key": "receiver_id",
+			"value": "your-receiver-uuid-here"
+		},
+		{
+			"key": "application_id",
+			"value": "your-application-uuid-here"
+		},
+		{
+			"key": "candidate_id",
+			"value": "your-candidate-uuid-here"
+		},
+		{
+			"key": "employer_id",
+			"value": "your-employer-uuid-here"
+		},
+		{
+			"key": "room_name",
+			"value": "chat_room_1"
+		}
+	]
+}

@@ -1,0 +1,694 @@
+{
+	"info": {
+		"_postman_id": "3c790b79-e487-40c3-a2bf-b575a8a53c63",
+		"name": "Candidate Microservice",
+		"description": "Postman Collection for Candidate Microservice built with Django and DRF",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25431245"
+	},
+	"item": [
+		{
+			"name": "Core Profile Operations",
+			"item": [
+				{
+					"name": "Create Candidate Profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"dob\": \"1990-01-01\",\n    \"gender\": \"M\",\n    \"phone\": \"1234567890\",\n    \"location\": \"New York\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/candidates/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"candidates",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Candidate Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/candidates/{{candidate_id}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"candidates",
+								"{{candidate_id}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Candidate Profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe Updated\",\n    \"phone\": \"0987654321\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/candidates/{{candidate_id}}/update/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"candidates",
+								"{{candidate_id}}",
+								"update",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload CV",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cv",
+									"type": "file",
+									"src": "/path/to/your/cv.pdf"
+								},
+								{
+									"key": "job_role",
+									"value": "Software Engineer",
+									"type": "text"
+								},
+								{
+									"key": "job_description",
+									"value": "Develop software solutions",
+									"type": "text"
+								},
+								{
+									"key": "key_skills",
+									"value": "[\"Python\", \"Django\"]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/candidates/{{candidate_id}}/upload-cv/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"candidates",
+								"{{candidate_id}}",
+								"upload-cv",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Add Related Data",
+			"item": [
+				{
+					"name": "Add Education",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"degree\": \"BSc Computer Science\",\n    \"university\": \"XYZ University\",\n    \"start_year\": 2010,\n    \"end_year\": 2014\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/candidates/{{candidate_id}}/education/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"candidates",
+								"{{candidate_id}}",
+								"education",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Work Experience",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"company_name\": \"Tech Corp\",\n    \"job_title\": \"Software Engineer\",\n    \"start_date\": \"2015-01-01\",\n    \"end_date\": \"2020-01-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/candidates/{{candidate_id}}/work-experience/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"candidates",
+								"{{candidate_id}}",
+								"work-experience",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Skill",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"skill_name\": \"Python\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/candidates/{{candidate_id}}/skills/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"candidates",
+								"{{candidate_id}}",
+								"skills",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Certification",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"AWS Certified Developer\",\n    \"issued_by\": \"Amazon\",\n    \"issue_date\": \"2022-01-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/candidates/{{candidate_id}}/certifications/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"candidates",
+								"{{candidate_id}}",
+								"certifications",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Edit Parsed Data",
+			"item": [
+				{
+					"name": "Edit Personal Info",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"John Updated\",\n    \"phone\": \"1112223333\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/candidates/{{candidate_id}}/edit-personal/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"candidates",
+								"{{candidate_id}}",
+								"edit-personal",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Education",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"degree\": \"MSc Computer Science\",\n    \"end_year\": 2016\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/education/{{education_id}}/edit/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"education",
+								"{{education_id}}",
+								"edit",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Work Experience",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"job_title\": \"Senior Software Engineer\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/work-experience/{{work_experience_id}}/edit/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"work-experience",
+								"{{work_experience_id}}",
+								"edit",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Skill",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"skill_name\": \"Django\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/skills/{{skill_id}}/edit/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"skills",
+								"{{skill_id}}",
+								"edit",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Certification",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"AWS Certified Solutions Architect\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/certifications/{{certification_id}}/edit/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"certifications",
+								"{{certification_id}}",
+								"edit",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Job Listings and Applications",
+			"item": [
+				{
+					"name": "Get Job List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/jobs/?candidate_id={{candidate_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"jobs",
+								""
+							],
+							"query": [
+								{
+									"key": "candidate_id",
+									"value": "{{candidate_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply for Job",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"candidate_id\": \"{{candidate_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/jobs/{{job_id}}/apply/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"jobs",
+								"{{job_id}}",
+								"apply",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Withdraw Application",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/applications/{{application_id}}/withdraw/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"applications",
+								"{{application_id}}",
+								"withdraw",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Interview Management",
+			"item": [
+				{
+					"name": "Get Interview Instructions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/interviews/{{interview_id}}/instructions/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"interviews",
+								"{{interview_id}}",
+								"instructions",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start Interview",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/interviews/{{interview_id}}/start/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"interviews",
+								"{{interview_id}}",
+								"start",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "Get Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/candidates/{{candidate_id}}/dashboard/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"candidates",
+								"{{candidate_id}}",
+								"dashboard",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "Get Notification List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/candidates/{{candidate_id}}/notifications/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"candidates",
+								"{{candidate_id}}",
+								"notifications",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Notification Read",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/notifications/{{notification_id}}/mark-read/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notifications",
+								"{{notification_id}}",
+								"mark-read",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000/api",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "your_jwt_token_here",
+			"type": "string"
+		},
+		{
+			"key": "candidate_id",
+			"value": "your_candidate_uuid_here",
+			"type": "string"
+		},
+		{
+			"key": "education_id",
+			"value": "your_education_uuid_here",
+			"type": "string"
+		},
+		{
+			"key": "work_experience_id",
+			"value": "your_work_experience_uuid_here",
+			"type": "string"
+		},
+		{
+			"key": "skill_id",
+			"value": "your_skill_uuid_here",
+			"type": "string"
+		},
+		{
+			"key": "certification_id",
+			"value": "your_certification_uuid_here",
+			"type": "string"
+		},
+		{
+			"key": "job_id",
+			"value": "your_job_uuid_here",
+			"type": "string"
+		},
+		{
+			"key": "application_id",
+			"value": "your_application_uuid_here",
+			"type": "string"
+		},
+		{
+			"key": "interview_id",
+			"value": "your_interview_uuid_here",
+			"type": "string"
+		},
+		{
+			"key": "notification_id",
+			"value": "your_notification_uuid_here",
+			"type": "string"
+		}
+	]
+}
