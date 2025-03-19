@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TA-Copilot Interview</title>
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+    <script src="/static/monaco/vs/loader.js"></script>
+    <style>
+        #editor { height: 400px; width: 100%; }
+        #video { width: 50%; }
+        #question-panel { display: none; } /* Hidden for candidates */
+    </style>
+</head>
+<body>
+    <video id="video" autoplay muted></video>
+    <div id="transcript"></div>
+    <div id="question-panel">
+        <button onclick="fetchQuestion()">Refresh AI Question</button>
+        <div id="question"></div>
+        <button onclick="markQuestion(true)">Mark Asked</button>
+        <button onclick="markQuestion(false, true)">Mark Diverted</button>
+    </div>
+    <div id="editor"></div>
+    <button onclick="submitCode()">Submit Code</button>
+    <button onclick="endInterview()">End Interview</button>
+
+    <script>
+        const interviewId = {{ interview_id }};
+        const token = "{{ token }}"; // Passed from middleware via template
+        const isInterviewer = true; // Determine dynamically in production
+        const peer = new Peer();
+        let mediaRecorder;
+
+        if (isInterviewer) document.getElementById('question-panel').style.display = 'block';
+
+        peer.on('open', () => {
+            fetch('/interview/start/', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ candidate_id: 1 })
+            }).then(res => res.json()).then(data => {
+                peer.signal(data.webrtc_offer);
+            });
+        });
+        peer.on('stream', stream => {
+            document.getElementById('video').srcObject = stream;
+        });
+
+        const ws = new WebSocket(`ws://localhost:8000/ws/interview/${interviewId}/`);
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            if (data.transcript) document.getElementById('transcript').innerText = data.transcript;
+            if (data.question) {
+                document.getElementById('question').innerText = data.question;
+                window.currentQuestionId = data.question_id;
+            }
+            if (data.evaluation) alert(data.evaluation);
+        };
+        navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(stream => {
+            peer.addStream(stream);
+            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.ondataavailable = (e) => ws.send(e.data);
+            mediaRecorder.start(1000);
+        });
+
+        require.config({ paths: { vs: '/static/monaco/vs' } });
+        require(['vs/editor/editor.main'], () => {
+            const editor = monaco.editor.create(document.getElementById('editor'), {
+                value: '',
+                language: 'python'
+            });
+            window.submitCode = () => {
+                ws.send(JSON.stringify({ code: editor.getValue() }));
+            };
+        });
+
+        function fetchQuestion() {
+            // Real-time via WebSocket, no manual refresh needed
+        }
+
+        function markQuestion(asked, diverted = false) {
+            fetch(`/interview/${interviewId}/questions/mark/`, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ question_id: window.currentQuestionId, asked, diverted })
+            });
+        }
+
+        function endInterview() {
+            fetch(`/interview/${interviewId}/end/`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` }
+            }).then(() => {
+                fetch(`/interview/${interviewId}/report/generate/`, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ feedback: 'Great interview!' })
+                }).then(res => res.json()).then(report => console.log(report));
+            });
+        }
+    </script>
+</body>
+</html>
